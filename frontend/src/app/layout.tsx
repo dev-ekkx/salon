@@ -28,6 +28,7 @@ export default function RootLayout({
         <Head>
             <link rel="preload" href="/images/onboarding-sm.jpg" as="image"/>
             <link rel="preload" href="/images/onboarding-lg.jpg" as="image"/>
+            <link rel="preload" href="/images/auth-bg.jpg" as="image"/>
         </Head>
         <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}

@@ -47,6 +47,7 @@
     --color-lf-light: var(--lf-light);
     --background-image-onboarding-sm: url('/images/onboarding-sm.jpg');
     --background-image-onboarding-lg: url('/images/onboarding-lg.jpg');
+    --background-image-auth: url('/images/auth-bg.jpg');
 }
 
 /*@media (prefers-color-scheme: dark) {*/
