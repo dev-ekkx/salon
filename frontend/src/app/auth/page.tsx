@@ -1,28 +1,16 @@
 'use client'
 
-import React, {useEffect} from 'react'
+import React from 'react'
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import {FcGoogle} from "react-icons/fc";
 import {emailAndPhoneValidator} from "@/lib/utils";
+import {useCountries} from "@/hooks/useCountries";
 
 const Page = () => {
+    const {data: countries} = useCountries();
 
-    async function fetchCountries() {
-        const response = await fetch("https://restcountries.com/v3.1/all?fields=name,flags,idd,cca3");
-        const res = await response.json();
-
-        return res.map((country: unknown) => ({
-            name: country.name.common,
-            flag: country.flags.svg,
-            calling_code: country.idd.root + (country.idd.suffixes ? country.idd.suffixes[0] : ""),
-            country_code_iso3: country.cca3
-        }));
-    }
-
-    useEffect(() => {
-        console.log(fetchCountries());
-    }, [])
+    console.log(countries);
 
     console.log(emailAndPhoneValidator("4343242sad@fd.cj"))
     return (

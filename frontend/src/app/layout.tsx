@@ -2,6 +2,8 @@ import type {Metadata} from "next";
 import {Geist, Geist_Mono} from "next/font/google";
 import "./globals.css";
 import Head from "next/head";
+import React from "react";
+import ReactQueryContext from "@/context/react-query";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -18,6 +20,7 @@ export const metadata: Metadata = {
     description: "An application to help salons manage online booking, staff calendars, and customer notifications.",
 };
 
+
 export default function RootLayout({
                                        children,
                                    }: Readonly<{
@@ -33,7 +36,9 @@ export default function RootLayout({
         <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-        {children}
+        <ReactQueryContext>
+            {children}
+        </ReactQueryContext>
         </body>
         </html>
     );
