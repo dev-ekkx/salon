@@ -1,4 +1,4 @@
-import {Country, RawCountry} from "@/interfaces";
+import {Country, RawCountry, UserCountry} from "@/interfaces/country";
 
 export const fetchCountries = async (): Promise<Country[]> => {
     const response = await fetch(
@@ -23,3 +23,7 @@ export const fetchCountries = async (): Promise<Country[]> => {
             country_code_iso3: country.cca3,
         }));
 };
+
+export const fetchUserCountryInfo = async (): Promise<UserCountry> => {
+
+}
