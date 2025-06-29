@@ -6,16 +6,26 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 
-export const emailAndPhoneValidator = (value: string | number) => {
+export const emailAndPhoneValidator = (value: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const phoneRegex = /^\+?[1-9]\d{1,14}$/;
-
-    if (emailRegex.test(value.toString())) {
-        return "email";
-    } else if (phoneRegex.test(value.toString())) {
-        return "phone";
+    const phoneRegex = /^\+?\d{2,15}$/;
+    
+    if (emailRegex.test(value)) {
+        return {
+            key: "email",
+            data: value
+        }
+    } else if (phoneRegex.test(value)) {
+        return {
+            key: "phone",
+            data: value.toString()
+        }
     } else {
-        return null;
+        return {
+            key: "error",
+            data: "Invalid email or phone number format"
+        };
     }
+
 }
 

@@ -1,18 +1,33 @@
 'use client'
 
-import React from 'react'
+import React, {useState} from 'react'
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import {FcGoogle} from "react-icons/fc";
 import {emailAndPhoneValidator} from "@/lib/utils";
-import {useCountries} from "@/hooks/useCountries";
+import parsePhoneNumber from "libphonenumber-js";
 
 const Page = () => {
-    const {data: countries} = useCountries();
+    // const {data: countries} = useCountries();
+    const [errorMessage, setErrorMessage] = useState("")
+    const [emailOrNumber, setEmailOrNumber] = useState<string | number>("")
+    const [isFormValid, setIsFormValid] = useState(false)
+    const [formValue, setFormValue] = useState()
 
-    console.log(countries);
+    const handleBlur = () => {
+        const validationCheck = emailAndPhoneValidator(emailOrNumber.toString().trim())
+        const data = validationCheck.data
+        if (validationCheck.key === "phone") {
+            console.log(parsePhoneNumber(data, 'GH'))
 
-    console.log(emailAndPhoneValidator("4343242sad@fd.cj"))
+
+        } else {
+            console.log(data)
+            setErrorMessage(validationCheck.data)
+            setIsFormValid(false)
+        }
+    }
+
     return (
         <div>
             <section className="hidden md:flex md:justify-center md:items-center h-dvh">
@@ -26,9 +41,16 @@ const Page = () => {
                         Book your perfect <br/> Look in minutes!
                     </p>
                     <div className="flex flex-col gap-4">
-                        <Input type={"text"} placeholder={"Enter your email or phone number"}
-                               className={"bg-white h-11"}/>
-                        <Button className={"h-11 cursor-pointer"}>Continue</Button>
+                        <Input
+                            type={"text"}
+                            placeholder={"Enter your email or phone number"}
+                            value={emailOrNumber}
+                            onBlur={handleBlur}
+                            onChange={(e) => setEmailOrNumber(e.target.value)}
+                            className={"bg-white h-11"}/>
+                        <Button
+                            disabled={!isFormValid}
+                            className={"h-11 cursor-pointer"}>Continue</Button>
                     </div>
                     <span className={"font-bold text-2xl mx-auto text-white"}>OR</span>
                     <Button
